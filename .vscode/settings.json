@@ -1,0 +1,8 @@
+{
+    "editor.rulers": [
+
+    ],
+    "files.associations": {
+        "*.js": "javascriptreact"
+    }
+}
