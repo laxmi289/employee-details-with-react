@@ -27,15 +27,18 @@ export const AddEmp = ({addEmp}) => {
     }
   }
 
+  let myStyle = {
+    minHeight: "76vh",
+    margin: "40px auto",
+  };
+
   return (
-    <div className="container mt-4">
+    <div className="container mt-4" style={myStyle}>
       <h5 className="mb-3">Add new employees</h5>
 
       <form onSubmit = {submit}>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
+          <label htmlFor="name" className="form-label">Name</label>
           <input type="text" className="form-control" value={name} onChange={(e) =>{setName(e.target.value)}} aria-describedby="emailHelp"/>
         </div>
 
@@ -52,22 +55,17 @@ export const AddEmp = ({addEmp}) => {
         </div>
 
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input type="email" className="form-control" value={email} id="exampleInputEmail1" onChange={(e) =>{setEmail(e.target.value)}} aria-describedby="emailHelp"
-          />
+          <label for="exampleInputEmail1" className="form-label">Email address</label>
+          <input type="email" className="form-control" value={email} id="exampleInputEmail1" onChange={(e) =>{setEmail(e.target.value)}} aria-describedby="emailHelp" />
         </div>
 
         <div className="mb-3">
-          <label for="phone" className="form-label">
-            Phone
-          </label>
-          <input type="phone" className="form-control" id="phone" value={phone} onChange={(e) =>{setPhone(e.target.value)}} aria-describedby="emailHelp"
-          />
+          <label for="phone" className="form-label">Phone</label>
+          <input type="phone" className="form-control" id="phone" value={phone} onChange={(e) =>{setPhone(e.target.value)}} aria-describedby="emailHelp" />
         </div>
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Add Employee</button>
+        {/* <input class="btn btn-primary" type="reset" value="Reset"/> */}
       </form>
     </div>
   );

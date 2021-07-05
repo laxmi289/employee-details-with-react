@@ -1,9 +1,14 @@
 import React from "react";
 
 export const EmpData = (props) => {
+  let myStyle = {
+    minHeight: "73vh",
+    margin: "40px auto",
+  };
+
   return (
     <>
-      <div className="container mt-5">
+      <div className="container mt-5" style={myStyle}>
         <h3 className="mt-4 mb-3">Employee Data</h3>
         <table className="table">
           <thead>
@@ -13,23 +18,25 @@ export const EmpData = (props) => {
               <th scope="col">Gender</th>
               <th scope="col">Email</th>
               <th scope="col">Phone</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           {props.emp.map((emps) => {
-          return (
-            <>
-            <tbody>
-              <tr>
-                <th scope="row" key={emps.id}>{emps.id}</th>
-                <td>{emps.name}</td>
-                <td>{emps.gender}</td>
-                <td>{emps.email}</td>
-                <td>{emps.phone}</td>
-              </tr>
-            </tbody>
-            </>
-          );
-        })}
+            return (
+              <>
+                <tbody>
+                  <tr>
+                    <th key={emps.id}>{emps.id}</th>
+                    <td>{emps.name}</td>
+                    <td>{emps.gender}</td>
+                    <td>{emps.email}</td>
+                    <td>{emps.phone}</td>
+                    <td><button type="submit" className="btn btn-sm btn-danger" onClick={ () => {props.onDelete(emps)}}>Delete</button></td>
+                  </tr>
+                </tbody>
+              </>
+            );
+          })}
         </table>
       </div>
     </>

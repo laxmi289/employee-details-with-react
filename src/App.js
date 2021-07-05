@@ -2,11 +2,14 @@ import "./App.css";
 import { Navbar } from "./MyComponents/Navbar";
 import { AddEmp } from "./MyComponents/AddEmp";
 import { EmpData } from "./MyComponents/EmpData";
+import { Footer } from "./MyComponents/Footer";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-
   let initEmps;
+
+  // If there is no key-value for emp in localStorage, creates an empty initEmps array else it stores the emp array inside initEmps which is then accessed later.
   if (localStorage.getItem("emp") === null) {
     initEmps = [];
   } else {
@@ -15,6 +18,8 @@ function App() {
 
   const addEmp = (name, gender, email, phone) => {
     console.log("I am adding this data", name, gender, email, phone);
+
+    //Creates/increments id for the submitted data
     let id;
     if (emp.length === 0) {
       id = 0;
@@ -22,6 +27,7 @@ function App() {
       id = emp[emp.length - 1].id + 1;
     }
 
+    //Creating an array of objects to hold the submitted data i.e., id, name, gender, email. phone
     const myData = {
       id: id,
       name: name,
@@ -29,16 +35,28 @@ function App() {
       email: email,
       phone: phone,
     };
+
+    //Appending myData to existing emp or if previous emp was empty, appends it to empty emp
     setEmps([...emp, myData]);
     console.log(myData);
   };
 
-
+  // Initialising empty JSON string for emp variable in the local storage
   const [emp, setEmps] = useState(initEmps);
   useEffect(() => {
     localStorage.setItem("emp", JSON.stringify(emp));
   }, [emp]);
 
+
+  // Delete function
+  const onDelete = (emps) => {
+    console.log("I am onDelete of todo", emps);
+    setEmps(emp.filter((e) => {
+      return e!==emps;
+    }));
+
+    localStorage.setItem("emp", JSON.stringify(emp));
+  }
   // const emp = [
   //   {
   //     id: 1,
@@ -60,9 +78,20 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
-      <AddEmp addEmp={addEmp} />
-      <EmpData emp={emp} />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Navbar />
+            <EmpData emp={emp} onDelete={onDelete}/>
+            <Footer />
+          </Route>
+          <Route path="/add">
+            <Navbar />
+            <AddEmp addEmp={addEmp} />
+            <Footer />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
