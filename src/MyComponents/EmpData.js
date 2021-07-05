@@ -20,7 +20,7 @@ export const EmpData = (props) => {
             <>
             <tbody>
               <tr>
-                <th scope="row">{emps.id}</th>
+                <th scope="row" key={emps.id}>{emps.id}</th>
                 <td>{emps.name}</td>
                 <td>{emps.gender}</td>
                 <td>{emps.email}</td>

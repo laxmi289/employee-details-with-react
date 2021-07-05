@@ -14,11 +14,16 @@ export const AddEmp = ({addEmp}) => {
         alert("Fill all the details")
     }
     else {
+        // localStorage.setItem('Name', name);
+        // localStorage.setItem('Gender', gender);
+        // localStorage.setItem('Email', email);
+        // localStorage.setItem('Phone', phone);
       addEmp(name, gender, email, phone);
       setName("");
       setGender("");
       setEmail("");
       setPhone("");
+      alert("Data Submitted");
     }
   }
 
@@ -31,17 +36,17 @@ export const AddEmp = ({addEmp}) => {
           <label htmlFor="name" className="form-label">
             Name
           </label>
-          <input type="text" className="form-control" id="name" onChange={(e) =>{setName(e.target.value)}} aria-describedby="emailHelp"/>
+          <input type="text" className="form-control" value={name} onChange={(e) =>{setName(e.target.value)}} aria-describedby="emailHelp"/>
         </div>
 
         <div className="mb-3">
           <label for="gender" className="form-label">Gender</label>
           <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) =>{setGender(e.target.value)}}/> 
+            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Female" onChange={(e) =>{setGender(e.target.value)}}/> 
             <label className="form-check-label" for="flexRadioDefault1">Female</label>
           </div>
           <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={(e) =>{setGender(e.target.value)}} />
+            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Male" onChange={(e) =>{setGender(e.target.value)}} />
             <label className="form-check-label" for="flexRadioDefault2">Male</label>
           </div>
         </div>
@@ -50,7 +55,7 @@ export const AddEmp = ({addEmp}) => {
           <label for="exampleInputEmail1" className="form-label">
             Email address
           </label>
-          <input type="email" className="form-control" id="exampleInputEmail1" onChange={(e) =>{setEmail(e.target.value)}} aria-describedby="emailHelp"
+          <input type="email" className="form-control" value={email} id="exampleInputEmail1" onChange={(e) =>{setEmail(e.target.value)}} aria-describedby="emailHelp"
           />
         </div>
 
@@ -58,7 +63,7 @@ export const AddEmp = ({addEmp}) => {
           <label for="phone" className="form-label">
             Phone
           </label>
-          <input type="phone" className="form-control" id="phone" onChange={(e) =>{setPhone(e.target.value)}} aria-describedby="emailHelp"
+          <input type="phone" className="form-control" id="phone" value={phone} onChange={(e) =>{setPhone(e.target.value)}} aria-describedby="emailHelp"
           />
         </div>
 
