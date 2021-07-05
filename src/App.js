@@ -60,32 +60,31 @@ function App() {
     localStorage.setItem("emp", JSON.stringify(emp));
   }
 
-  //Update functionality 
-  const onUpdate = (id, email, phone) => {
-    console.log("this id:",id, " with email:",email, " and phone:",phone, " is to be updated");
-    
-    let index=emp.findIndex( x => x.id === id);
-    console.log(emp[index]);
+  //getUrl
+  const getUrl = () => {
+    const urlEl = window.location.href;
+    console.log(urlEl);
+    const idEl = urlEl.split('/');
+    console.log(idEl[4]);
+    sessionStorage.setItem("new_id", idEl[4]);
   }
 
-  // const emp = [
-  //   {
-  //     id: 1,
-  //     name: "Laxmi Gowthami Ittappa",
-  //     gender: "Female",
-  //     email: "laxmi@gmail.com",
-  //     phone: 9876543234,
-  //     salary: "$1000000",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Sindhu Ittappa",
-  //     gender: "Female",
-  //     email: "sindhu@gmail.com",
-  //     phone: 9876543234,
-  //     salary: "$1000000",
-  //   },
-  // ];
+  const id_up = sessionStorage.getItem("new_id");
+  
+  //Update functionality 
+  const onUpdate = (id_up, email, phone) => {
+    console.log("this id:",id_up, " with email:",email, " and phone:",phone, " is to be updated");
+
+    // let index= x => x.id === id_up;
+    // console.log("data found",emp.findIndex(index));
+
+    // const data = emp.filter(record => record.id === id_up);
+    // const full = localStorage.getItem("emp");
+    const data = Object.values(emp).filter((record) => record.id === 1000);
+
+    console.log(data);
+  
+  }
 
   return (
     <div className="App">
@@ -93,7 +92,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Navbar />
-            <EmpData emp={emp} onDelete={onDelete} onUpdate={onUpdate}/>
+            <EmpData emp={emp} onDelete={onDelete} />
             <Footer />
           </Route>
           <Route path="/add">
@@ -101,9 +100,9 @@ function App() {
             <AddEmp addEmp={addEmp} />
             <Footer />
           </Route>
-          <Route exact path="/update">
+          <Route exact path="/update/:id">
             <Navbar />
-            <UpdateDetails emp={emp} />
+            <UpdateDetails emp={emp} onUpdate={onUpdate} getUrl={getUrl} id_up={id_up}/>
             <Footer />
           </Route>
         </Switch>

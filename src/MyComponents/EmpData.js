@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, generatePath } from "react-router-dom";
 
 export const EmpData = (props) => {
   let myStyle = {
@@ -37,7 +37,7 @@ export const EmpData = (props) => {
                       <td>{emps.phone}</td>
                       <td>
                         <button type="submit" className="btn btn-sm btn-danger" onClick={() => { props.onDelete(emps); }}> Delete</button>
-                        <Link className="btn btn-sm btn-primary mx-2" to="/update" onClick={() => (props.onUpdate(emps.id, emps.email, emps.phone))}> Update </Link>
+                        <Link className="btn btn-sm btn-primary mx-2" to={generatePath("/update/:id", { id: emps.id })}> Update </Link>
                       </td>
                     </tr>
                   </tbody>
