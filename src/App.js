@@ -3,6 +3,7 @@ import { Navbar } from "./MyComponents/Navbar";
 import { AddEmp } from "./MyComponents/AddEmp";
 import { EmpData } from "./MyComponents/EmpData";
 import { Footer } from "./MyComponents/Footer";
+import { UpdateDetails } from "./MyComponents/UpdateDetails";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -22,7 +23,7 @@ function App() {
     //Creates/increments id for the submitted data
     let id;
     if (emp.length === 0) {
-      id = 0;
+      id = 1000;
     } else {
       id = emp[emp.length - 1].id + 1;
     }
@@ -48,6 +49,7 @@ function App() {
   }, [emp]);
 
 
+
   // Delete function
   const onDelete = (emps) => {
     console.log("I am onDelete of todo", emps);
@@ -57,6 +59,15 @@ function App() {
 
     localStorage.setItem("emp", JSON.stringify(emp));
   }
+
+  //Update functionality 
+  const onUpdate = (id, email, phone) => {
+    console.log("this id:",id, " with email:",email, " and phone:",phone, " is to be updated");
+    
+    let index=emp.findIndex( x => x.id === id);
+    console.log(emp[index]);
+  }
+
   // const emp = [
   //   {
   //     id: 1,
@@ -82,12 +93,17 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Navbar />
-            <EmpData emp={emp} onDelete={onDelete}/>
+            <EmpData emp={emp} onDelete={onDelete} onUpdate={onUpdate}/>
             <Footer />
           </Route>
           <Route path="/add">
             <Navbar />
             <AddEmp addEmp={addEmp} />
+            <Footer />
+          </Route>
+          <Route exact path="/update">
+            <Navbar />
+            <UpdateDetails emp={emp} />
             <Footer />
           </Route>
         </Switch>
